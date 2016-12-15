@@ -50,7 +50,7 @@ var formatCurrency = function (d) { if (isNaN(d)) d = 0; return "$" + d3.format(
 
 function loadData() {
 
-    d3.csv("data/weightedtree_federal_budget.csv", function (csv) {
+    d3.csv("data/2011.csv", function (csv) {
 
         data.values=prepData(csv);
 
@@ -64,34 +64,38 @@ function prepData(csv) {
 
     var values=[];
 
+
     //Clean federal budget data and remove all rows where all values are zero or no labels
-    csv.forEach(function (d,i) {
-        var t = 0;
-        for (var i = 0; i < valueFields.length; i++) {
-            t += Number(d[valueFields[i]]);
-        }
-        if (t > 0) {
+    csv.forEach(function (d) {
             values.push(d);
-        }
     })
 
     //Make our data into a nested tree.  If you already have a nested structure you don't need to do this.
     var nest = d3.nest()
         .key(function (d) {
-            return d.Level1;
+            return d.Agency;
         })
         .key(function (d) {
-            return d.Level2;
+            return d.Category;
         })
         .key(function (d) {
-            return d.Level3;
+            return d.Detail;
         })
+        .key(function (d) {
+            return d.Vendor;
+        })
+        // .key(function (d) {
+        //     return d.Federal;
+        // })
+        // .rollup(function(leaves) { return {"count": leaves.length, "total_payments": d3.sum(leaves, function(d) {return parseFloat(d.Payments);})} })
         .entries(values);
+
+    
 
 
     //This will be a viz.data function;
     vizuly.data.aggregateNest(nest, valueFields, function (a, b) {
-        return Number(a) + Number(b);
+        return Number(a)+Number(b);
     });
 
     //Remove empty child nodes left at end of aggregation and add unqiue ids
@@ -114,7 +118,8 @@ function prepData(csv) {
     var node={};
     node.values = nest;
     removeEmptyNodes(node,"0","0");
-
+console.log(nest);
+debugger
     return nest;
 }
 
