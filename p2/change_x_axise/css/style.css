@@ -32,10 +32,30 @@ body {
   position: absolute;
   top: 200px;
   left: 30px;
-  width: 200px;
+  width: 300px;
   font-size: 12px;
 }
-
+#filter1 {
+  position: absolute;
+  /*top: 200px;*/
+  left: 30px;
+  width: 300px;
+  font-size: 12px;
+}
+#colorLegend {
+  position: :absolute;
+  top:500px;
+  left: 30px;
+  width: 300px;
+  font-size: 10px;
+}
+#filter2 {
+  position: absolute;
+  top: 100px;
+  left: 30px;
+  width: 300px;
+  font-size: 12px;
+}
 #about .social {
   margin-top: 5px;
 }
@@ -89,7 +109,7 @@ li.selected {
 
 .d3-tip {
   line-height: 1;
-  font-weight: bold;
+  /*font-weight: bold;*/
   padding: 12px;
   background: rgba(0, 0, 0, 0.8);
   color: #fff;
