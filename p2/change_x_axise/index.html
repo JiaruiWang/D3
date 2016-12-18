@@ -6,6 +6,8 @@
 	    <title>Sales from Vendors</title>
 	    <link rel="stylesheet" href="css/style.css">
 	    <link rel="stylesheet" href="css/svg.css">
+	    <link rel="stylesheet" href="css/jquery-ui-slider-pips.min.css">
+	    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/flick/jquery-ui.css">
 	    <script type="text/javascript">
 	      var _gaq = _gaq || [];
 	      _gaq.push(['_setAccount', 'UA-37639745-1']);
@@ -28,32 +30,52 @@
 			<div id="title">
 				<h1>Sales from Vendors</h1>
 			</div>
-
-			<div id="about">
-				<div id="filter1">
-				    <h3>Select Vendors:</h3>
-				</div>
-				<div id="filter2">
-				    <h3>Select Details:</h3>
-				</div>
-			</div>
-
+			
 			<div id="menu">
 <!-- 				<h2>&uarr; Y axis</h2>
 				<ul id="y-axis-menu"></ul>
 				<h2>&rarr; X axis</h2>
  -->				<ul id="x-axis-menu"></ul>
 			</div>
+			
+			<div id="dropDown">
+				<div id="drop1">
+				    <h3>Select Vendors:</h3>
+				</div>
+				<div id="drop2">
+				    <h3>Select Details:</h3>
+				</div>
+			</div>
+
+			<div id="slider">
+				<p >Service times of Vendor:</p>
+				<p>
+					<input type="text" class="sliderValue" data-index="0" value="10" />
+			        <input type="text" class="sliderValue" data-index="1" value="401" />	
+				</p>
+				<p id="slider1"></p> 
+
+				<p >Total payments for Vendor($):</p>
+				<p>
+					<input type="text"  class="sliderValue" data-index="2" value="699.79" />
+					<input type="text"  class="sliderValue" data-index="3" value="137991177.24" />
+				</p>
+				<p id="slider2"></p> 
+			</div>
+			
 			<div id = "colorLegend">
 			</div>
 		</div>
 
 		<script src="js/d3.v3.min.js"></script>
+		<script src="https://d3js.org/d3-queue.v3.min.js"></script>
 		<script src="js/underscore-min.js"></script>
-		<script src="js/main.js"></script>
+		<script src="js/cp.js"></script>
 		<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 
-
-
+		<script src="https://code.jquery.com/jquery-2.1.1.js"></script>
+		<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+    	<script src="js/jquery-ui-slider-pips.min.js"></script>
+		<script src="js/main.js"></script>
 	</body>
 </html>
