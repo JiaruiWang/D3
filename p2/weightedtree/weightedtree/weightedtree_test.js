@@ -50,7 +50,7 @@ var formatCurrency = function (d) { if (isNaN(d)) d = 0; return "$" + d3.format(
 
 function loadData() {
 
-    d3.csv("data/2011.csv", function (csv) {
+    d3.csv("data/sales.csv", function (csv) {
 
         data.values=prepData(csv);
 
@@ -119,7 +119,6 @@ function prepData(csv) {
     node.values = nest;
     removeEmptyNodes(node,"0","0");
 console.log(nest);
-debugger
     return nest;
 }
 
