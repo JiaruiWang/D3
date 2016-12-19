@@ -10,14 +10,14 @@ function dashboard(id, fData){
     // function to handle histogram.
     function histoGram(fD){
         var hG={},    hGDim = {t: 0, r: 0, b: 0, l: 0};
-        hGDim.w = 1000 - hGDim.l - hGDim.r, 
+        hGDim.w = 950 - hGDim.l - hGDim.r, 
         hGDim.h = 420 - hGDim.t - hGDim.b;
             
         //create svg for histogram.
         var hGsvg = d3.select(id).append("svg")
             .attr("width", hGDim.w + hGDim.l + hGDim.r)
             .attr("height", hGDim.h + hGDim.t + hGDim.b).append("g")
-            .attr("transform", "translate(" + hGDim.l+ 250 + "," + hGDim.t + ")");
+            .attr("transform", "translate(" + hGDim.l+ 300 + "," + hGDim.t + ")");
 
         // create function for x-axis mapping.
         var y = d3.scale.ordinal()
@@ -270,4 +270,11 @@ function dashboard(id, fData){
     var hG = histoGram(sF), // create the histogram.
         pC = pieChart(tF), // create the pie-chart.
         leg= legend(tF);  // create the legend.
+    d3.select('#pb_ti').append("text")
+        .attr("x", 450)             
+        .attr("y", 25)
+        .attr("text-anchor", "middle")  
+        .style("font-size", "30px")  
+        .style('fill','black') 
+        .text("Total Expenditures of/within Agencies(bar) and Categories(pie)");
 }

@@ -2,6 +2,7 @@
 <meta charset="utf-8">
 <html lang="en">
     <head>
+        <title>2011 State Expenditures Analysis</title>
         <meta charset="utf-8">
         <!-- css file -->
         <link rel="stylesheet" href="css/pie_bar.css">
@@ -37,16 +38,42 @@
     <body>
     <script src="data/cp.js"></script>
         <script src="js/scatter.js"></script>
+        <div id='big_title'>
+            <svg id='big_t'>
+            </svg>
+        </div>
+        <script type="text/javascript">
+            d3.select('#big_t').append("text")
+            .attr("x", 950)             
+            .attr("y", 75)
+            .attr("text-anchor", "middle")  
+            .style("font-size", "60px")  
+            .style('fill','black') 
+            .text("2011 State Expenditures Analysis");
+        </script>
         <!-- pie_bar plot -->
-        <div id='dashboard'></div>
-        <div id='pieChart' ></div>
-        <div id='ta'></div>
+        <div id='pie_bar'>
+            <div id='pb_title'>
+                <svg id='pb_ti'>
+                </svg>
+            </div>
+            <div id='dashboard'></div>
+            <div id='pieChart' ></div>
+            <div id='ta'></div>
+        </div>
         <script type="text/javascript" src="js/pie_bar.js"></script>
         <script type="text/javascript" src="data/freqData.js"></script>
 
         <!-- treemap plot  -->
-        <div id="currentDisplay" class="selected">
-            <div id="viz_container"></div>
+        <div id='tree_map'>
+            <div id='tree_title'>
+                <svg id='tree_ti'>
+                </svg>
+            </div>
+            <div id="currentDisplay" class="selected">
+                
+                <div id="viz_container"></div>
+            </div>
         </div>
         <script src="js/tree.js"></script>
         

@@ -27,6 +27,13 @@ $(document).ready(function () {
             .style("width", 800 + "px")
             .style("height", 900 + "px");
 
+    d3.select('#tree_ti').append("text")
+        .attr("x", 450)             
+        .attr("y", 25)
+        .attr("text-anchor", "middle")  
+        .style("font-size", "30px")  
+        .style('fill','black') 
+        .text("Tree Map for Agency Category Detail Vendor");
 
     loadData();
 
