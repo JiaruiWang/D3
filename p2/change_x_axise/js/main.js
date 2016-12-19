@@ -73,8 +73,8 @@ function getCorrelation(xArray, yArray) {
   return {r: r, m: m, b: b};
 }
 
-d3.csv('sales.csv', function(data) {
-  console.log(data[0]);
+d3.tsv('salesNew.tsv', function(data) {
+  // console.log(data[0]);
 
   var xAxis = 'Category', yAxis = 'Payments';
   var xAxisOptions = ["Agency", "Category"]
@@ -133,96 +133,7 @@ var sameVender;
     });
 
 
-  function CateColor(c){ 
-    return {'BUILDING LEASE PAYMENTS':"#c7c7c7", 
-            'COMMUNICATION SERVICE & SUPPLIES':"#aec7e8",
-            'COMPUTER EQUIPMENT':"#ff7f0e",
-            'DEBT SERVICE':"#ffbb78",
-            'EQUIPMENT RENTAL & LEASES':"#2ca02c",
-            'FUEL & UTILITIES':"#98df8a", 
-            'HOUSEKEEP & JANITOR SERVICES':"#d62728",
-            'MISCELLANEOUS EXPENSES':"#ff9896",
-            'MOTORIZED EQUIPMENT':"#9467bd", 
-            'OFFICE EQUIPMENT':"#c5b0d5", 
-            'OTHER EQUIPMENT':"#8c564b", 
-            'PROFESSIONAL DEVELOPMENT':"#c49c94", 
-            'PROFESSIONAL SERVICES':"#e377c2", 
-            'PROGRAM DISTRIBUTIONS':"#f7b6d2", 
-            'PROPERTY & IMPROVEMENTS':"#bcbd22",
-            'REPAIR & MAINTENANCE SERVICES':"#dbdb8d", 
-            'SUPPLIES':"#17becf",
-            'TRAVEL':"#9edae5"}[c]; }
-
-  var cate = ['BUILDING LEASE PAYMENTS', 
-              'COMMUNICATION SERVICE & SUPPLIES', 
-              'COMPUTER EQUIPMENT', 
-              'DEBT SERVICE', 
-              'EQUIPMENT RENTAL & LEASES', 
-              'FUEL & UTILITIES', 
-              'HOUSEKEEP & JANITOR SERVICES', 
-              'MISCELLANEOUS EXPENSES', 
-              'MOTORIZED EQUIPMENT', 
-              'OFFICE EQUIPMENT', 
-              'OTHER EQUIPMENT', 
-              'PROFESSIONAL DEVELOPMENT', 
-              'PROFESSIONAL SERVICES', 
-              'PROGRAM DISTRIBUTIONS', 
-              'PROPERTY & IMPROVEMENTS', 
-              'REPAIR & MAINTENANCE SERVICES', 
-              'SUPPLIES', 
-              'TRAVEL'];
-  function AgenColor(c){ 
-    return {'AGRICULTURE':"#5254a3", 
-            'CONSERVATION':"#9c9ede", 
-            'CORRECTIONS':"#8ca252", 
-            'ECONOMIC DEVELOPMENT':"#b5cf6b", 
-            'ELEMENTARY AND SECONDARY EDUCATION':"#bd9e39", 
-            'HEALTH AND SENIOR SERVICES':"#cedb9c", 
-            'HIGHER EDUCATION':"#d6616b", 
-            'INSURANCE, FIN INST AND PROF REGISTRATION':"#e7ba52", 
-            'JUDICIARY':"#ad494a", 
-            'LABOR AND INDUSTRIAL RELATIONS':"#e7969c", 
-            'LEGISLATURE':"#ce6dbd", 
-            'MENTAL HEALTH':"#3182bd", 
-            'NATURAL RESOURCES':"#de9ed6", 
-            'OFFICE OF ADMINISTRATION':"#9ecae1", 
-            'OFFICE OF ATTORNEY GENERAL':"#e6550d", 
-            'OFFICE OF GOVERNOR':"#fd8d3c", 
-            'OFFICE OF LIEUTENANT GOVERNOR':"#fdd0a2", 
-            'OFFICE OF SECRETARY OF STATE':"#31a354", 
-            'OFFICE OF STATE AUDITOR':"#a1d99b", 
-            'OFFICE OF STATE TREASURER':"#9e9ac8", 
-            'PUBLIC SAFETY':"#969696", 
-            'REVENUE':"#d62728", 
-            'SOCIAL SERVICES':"#e377c2", 
-            'TRANSPORTATION':"#9467bd"}[c]; }
-
-
-
-  var agen = ['AGRICULTURE', 
-              'CONSERVATION', 
-              'CORRECTIONS', 
-              'ECONOMIC DEVELOPMENT', 
-              'ELEMENTARY AND SECONDARY EDUCATION', 
-              'HEALTH AND SENIOR SERVICES', 
-              'HIGHER EDUCATION', 
-              'INSURANCE, FIN INST AND PROF REGISTRATION', 
-              'JUDICIARY', 
-              'LABOR AND INDUSTRIAL RELATIONS', 
-              'LEGISLATURE', 
-              'MENTAL HEALTH', 
-              'NATURAL RESOURCES', 
-              'OFFICE OF ADMINISTRATION', 
-              'OFFICE OF ATTORNEY GENERAL', 
-              'OFFICE OF GOVERNOR', 
-              'OFFICE OF LIEUTENANT GOVERNOR', 
-              'OFFICE OF SECRETARY OF STATE', 
-              'OFFICE OF STATE AUDITOR', 
-              'OFFICE OF STATE TREASURER', 
-              'PUBLIC SAFETY', 
-              'REVENUE', 
-              'SOCIAL SERVICES', 
-              'TRANSPORTATION'];
+  
   // the legend color guide
   var legendSVG = d3.select("#colorLegend").append("svg").attr("id","colorLegendSVG").attr("width", 570).attr("height",1000);
   // legendSVG.selectAll("rect")
@@ -298,9 +209,11 @@ var sameVender;
 
   
   var dropDownVendors = d3.select("#drop1").append("select")
-                    .attr("name", "selectVendors");
+                    .attr("name", "selectVendors")
+                    .attr("id", "selectVendors");
   var dropDownDetails = d3.select("#drop2").append("select")
-                    .attr("name", "selectDetails");
+                    .attr("name", "selectDetails")
+                    .attr("id", "selectDetails");
 
   var optionsVendors = dropDownVendors.selectAll("option")
            .data(["All"].concat(ven))
@@ -317,6 +230,8 @@ var sameVender;
   optionsDetails.text(function (d) { return d; })
        .attr("value", function (d) { return d; });
   var mini = 0;
+  var array = [];
+  var x = 0;
   $('#slider1')
     .slider({
       range: true,
@@ -324,23 +239,43 @@ var sameVender;
         min: 10,
         values: [10,401],
         slide: function( event, ui ) {
+          document.getElementById("selectDetails").options[0].selected = "selected";
+          document.getElementById("selectVendors").options[0].selected = "selected";
           // console.log(ui.values);
           for (var i = 0; i < ui.values.length; ++i) {
               $("input.sliderValue[data-index=" + i + "]").val(ui.values[i]);
           }
-          
-          //   d3.selectAll(count)
+          // array = [];
+          // x = 0;
+          var vt = $('#slider2').slider("values");
+        
+            d3.selectAll(".circles")
+            .filter(function(d) {return (vt[0] > d.TotalP || vt[1] <d.TotalP ||ui.values[0] > d.Counts || ui.values[1] <d.Counts );})
+            .attr("display", "none");
+            
+            d3.selectAll(".circles")
+            .filter(function(d) {return (vt[0] <= d.TotalP && vt[1] >= d.TotalP &&ui.values[0] <= d.Counts && ui.values[1] >= d.Counts );})
+            .attr("display", "display");
+
+          //   .filter(function (d) {
+              
+          //     if(d.cou < ui.values[0])
+          //     {
+          //       array[x] = d.ven;
+          //       x++;
+          //     }
+          //     return (d.cou < ui.values[0]);
+          //   });
+            
+
           //   .filter( funtion (d) {return (d.cou < ui.values[0]);});
           //   // {
           //   //   // console.log(count[i].ven.replace(/ /g,'_'))
-              var hideVen = d3.selectAll(document.getElementsByClassName(count[i].ven.replace(/ /g,'_')))
+              // var hideVen = d3.selectAll(document.getElementsByClassName(count[i].ven.replace(/ /g,'_')))
           //   //   // console.log(hideVen);
           //   //   hideVen.attr("display", "none");
           //   // }
           // }
-
-
-
 
 
       }
@@ -351,14 +286,24 @@ var sameVender;
       rest: false,
       
     })
-    .slider('float',{
-      pips: true
-    });  
-    $("input.sliderValue").change(function() {
-        var $this = $(this);
-        // console.log($this.data("index"));
-        $("#slider1").slider("values", $this.data("index"), $this.val());
-    });
+    // .slider('float',{
+    //   pips: true
+    // });  
+
+  //   $("input.sliderValue").change(function() {
+  //     var $this = $(this);
+  //     // console.log($this.data("index"));
+  //     $("#slider2").slider("values", $this.data("index")-2, $this.val());
+  //     // console.log($('#slider2').slider("values"))
+  //     // var values = $('#slider2').slider("values");
+  //     // d3.selectAll(".circles")
+  //     // .filter(function(d) {return (values[0] > d.TotalP || values[1] <d.TotalP );})
+  //     // .attr("display", "none");
+      
+  //     // d3.selectAll(".circles")
+  //     // .filter(function(d) {return (values[0] <= d.TotalP && values[1] >= d.TotalP );})
+  //     // .attr("display", "display");
+  // });
 
   $('#slider2')
   .slider({
@@ -367,10 +312,21 @@ var sameVender;
       min: 699.79,
       values: [699.79,137991177.24],
       slide: function( event, ui ) {
+        document.getElementById("selectDetails").options[0].selected = "selected";
+        document.getElementById("selectVendors").options[0].selected = "selected";
         for (var i = 0; i < ui.values.length; ++i) {
             // console.log(ui.values);
             $("input.sliderValue[data-index=" + (i+2) + "]").val(ui.values[i]);
         }
+
+        var vc = $('#slider1').slider("values");
+        d3.selectAll(".circles")
+        .filter(function(d) {return (ui.values[0] > d.TotalP || ui.values[1] <d.TotalP || vc[0] > d.Counts || vc[1] <d.Counts);})
+        .attr("display", "none");
+        
+        d3.selectAll(".circles")
+        .filter(function(d) {return (ui.values[0] <= d.TotalP && ui.values[1] >= d.TotalP && vc[0] <= d.Counts && vc[1] >= d.Counts);})
+        .attr("display", "display");
     }
   })
   .slider('pips',{
@@ -379,17 +335,49 @@ var sameVender;
     rest: false,
     
   })
-  .slider('float',{
-    pips: true
-  });  
-  $("input.sliderValue").change(function() {
-      var $this = $(this);
-      // console.log($this.data("index"));
-      $("#slider2").slider("values", $this.data("index")-2, $this.val());
-  });
+  // .slider('float',{
+  //   pips: true
+  // });  
+
     // console.log($( "#output1" ).value);
   // $( "#output1" ).val(   $( "#slider-range" ).slider( "values", 0 ) +
   //     " - " + $( "#slider-range" ).slider( "values", 1 )  );
+
+  $("input.sliderValue").change(function() {
+
+      document.getElementById("selectDetails").options[0].selected = "selected";
+      document.getElementById("selectVendors").options[0].selected = "selected";
+      var $this = $(this);
+      console.log($this.data("index"));
+      if($this.data("index")<2)
+      {
+        $("#slider1").slider("values", $this.data("index"), $this.val());
+        var vc = $('#slider1').slider("values");
+        var vt = $('#slider2').slider("values");
+        d3.selectAll(".circles")
+        .filter(function(d) {return (vt[0] > d.TotalP || vt[1] <d.TotalP ||vc[0] > d.Counts || vc[1] <d.Counts );})
+        .attr("display", "none");
+        
+        d3.selectAll(".circles")
+        .filter(function(d) {return (vt[0] <= d.TotalP && vt[1] >= d.TotalP && vc[0] <= d.Counts && vc[1] >= d.Counts );})
+        .attr("display", "display");
+      }
+      if($this.data("index")>1)
+      {
+        $("#slider2").slider("values", $this.data("index")-2, $this.val());
+        var vt = $('#slider2').slider("values");
+        var vc = $('#slider1').slider("values");
+        d3.selectAll(".circles")
+        .filter(function(d) {return (vt[0] > d.TotalP || vt[1] <d.TotalP || vc[0] > d.Counts || vc[1] <d.Counts);})
+        .attr("display", "none");
+        
+        d3.selectAll(".circles")
+        .filter(function(d) {return (vt[0] <= d.TotalP && vt[1] >= d.TotalP && vc[0] <= d.Counts && vc[1] >= d.Counts);})
+        .attr("display", "display");
+        }
+
+      
+  });
 
 
   updateScales('Agency');
@@ -407,6 +395,8 @@ var sameVender;
                                          " "+data[i].Detail.replace(/ /g,'_')+
                                          " "+data[i].Vendor.replace(/ /g,'_')
                                          })
+    .attr("count",function(d,i){return data[i].Counts})
+    .attr("totalP", function(d,i){return data[i].TotalP})
     .attr("id", function(d,i){return data[i].Vendor.replace(/ /g,'_') })
     .attr('cx', function(d) {
       return isNaN(d[xAxis]) ? xScale(d[xAxis]) : xScale(d[xAxis]);
@@ -676,17 +666,17 @@ var sameVender;
     //                 .domain([bounds[xAxis].min, bounds[xAxis].max])
     //                 .range([20, 780]);
     xScale = d3.scale.ordinal()
-                    .rangeRoundBands([0, 800], 0.1)
-          if(ss==='Agency'){
-              
-                    xScale.domain(agen.map(function(d) {return d; })); 
-      }else if(ss==='Category'){
+            .rangeRoundBands([0, 800], 0.1)
+    if(ss==='Agency'){
+            
+                  xScale.domain(agen.map(function(d) {return d; })); 
+    }else if(ss==='Category'){
 
-                    xScale.domain(cate.map(function(d) {return d; })); 
-      }else if(ss==='Detail'){
+                  xScale.domain(cate.map(function(d) {return d; })); 
+    }else if(ss==='Detail'){
 
-                    xScale.domain(det.map(function(d) {return d; })); 
-      }
+                  xScale.domain(det.map(function(d) {return d; })); 
+    }
     // xScale = d3.scale.ordinal()
     //                 .rangeRoundBands([0, 700], 0.1)
     //                 .domain(agen.map(function(d) {return d; }));             
@@ -721,49 +711,59 @@ var sameVender;
     });
   }
 
-    dropDownVendors.on("change", function() {
-      var selected = this.value;
-      console.log(selected);
-      displayOthers = this.checked ? "inline" : "none";
-      console.log(displayOthers);
-      display = this.checked ? "none" : "inline";
-      console.log(display);
-      if(selected == 'All'){
-        svg.selectAll(".circles")
-            .attr("display", display);
-      }
-      else{
-        svg.selectAll(".circles")
-            .filter(function(d) {return selected != d.Vendor;})
-            .attr("display", displayOthers);
-            
-        svg.selectAll(".circles")
-            .filter(function(d) {return selected == d.Vendor;})
-            .attr("display", display);
-      }
-    });
+  dropDownVendors.on("change", function() {
+    document.getElementById("selectDetails").options[0].selected = "selected";
+    $("#slider1").slider('values',0,10);
+    $("#slider1").slider('values',1,401);
+    $("#slider2").slider('values',0,699.79);
+    $("#slider2").slider('values',1,137991177.24);
+    var selected = this.value;
+    console.log(selected);
+    displayOthers = this.checked ? "inline" : "none";
+    console.log(displayOthers);
+    display = this.checked ? "none" : "inline";
+    console.log(display);
+    if(selected == 'All'){
+      svg.selectAll(".circles")
+          .attr("display", display);
+    }
+    else{
+      svg.selectAll(".circles")
+          .filter(function(d) {return selected != d.Vendor;})
+          .attr("display", displayOthers);
+          
+      svg.selectAll(".circles")
+          .filter(function(d) {return selected == d.Vendor;})
+          .attr("display", display);
+    }
+  });
 
-    dropDownDetails.on("change", function() {
-      var selected = this.value;
-      console.log(selected);
-      displayOthers = this.checked ? "inline" : "none";
-      console.log(displayOthers);
-      display = this.checked ? "none" : "inline";
-      console.log(display);
-      if(selected == 'All'){
-        svg.selectAll(".circles")
-            .attr("display", display);
-      }
-      else{
-        svg.selectAll(".circles")
-            .filter(function(d) {return selected != d.Detail;})
-            .attr("display", displayOthers);
-            
-        svg.selectAll(".circles")
-            .filter(function(d) {return selected == d.Detail;})
-            .attr("display", display);
-      }
-    });
+  dropDownDetails.on("change", function() {
+    document.getElementById("selectVendors").options[0].selected = "selected";
+    $("#slider1").slider('values',0,10);
+    $("#slider1").slider('values',1,401);
+    $("#slider2").slider('values',0,699.79);
+    $("#slider2").slider('values',1,137991177.24);
+    var selected = this.value;
+    console.log(selected);
+    displayOthers = this.checked ? "inline" : "none";
+    console.log(displayOthers);
+    display = this.checked ? "none" : "inline";
+    console.log(display);
+    if(selected == 'All'){
+      svg.selectAll(".circles")
+          .attr("display", display);
+    }
+    else{
+      svg.selectAll(".circles")
+          .filter(function(d) {return selected != d.Detail;})
+          .attr("display", displayOthers);
+          
+      svg.selectAll(".circles")
+          .filter(function(d) {return selected == d.Detail;})
+          .attr("display", display);
+    }
+  });
 
 })
 

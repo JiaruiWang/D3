@@ -46,7 +46,7 @@ var valueField = "Federal";
 var valueFields = ["Federal", "State", "Local"];
 
 
-var formatCurrency = function (d) { if (isNaN(d)) d = 0; return "$" + d3.format(",.2f")(d) + " Billion"; };
+var formatCurrency = function (d) { if (isNaN(d)) d = 0; return "$" + d3.format(",.2f")(d); };
 
 function loadData() {
 
@@ -198,14 +198,14 @@ function createDataTip(x,y,h1,h2,h3) {
 
 function onMeasure() {
    // Allows you to manually override vertical spacing
-   // viz.tree().nodeSize([100,0]);
+   viz.tree().nodeSize([100,0]);
 }
 
 function onMouseOver(e,d,i) {
     if (d == data) return;
     var rect = e.getBoundingClientRect();
     if (d.target) d = d.target; //This if for link elements
-    createDataTip(rect.left, rect.top, (d.key || (d['Level' + d.depth])), formatCurrency(d["agg_" + valueField]),valueField);
+    createDataTip(rect.left, rect.top, (d.key || (d['Level' + d.depth])), formatCurrency(d["agg_" + valueField]),"Total Payments");
 
 
 }

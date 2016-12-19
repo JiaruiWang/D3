@@ -131,9 +131,9 @@ path.domain {
     border-radius: 5px;
 }
 
-svg {
+/*svg {
     fill:#FFF;
-}
+}*/
 
 i.mdi-navigation-menu:before {
     font-size:40px;

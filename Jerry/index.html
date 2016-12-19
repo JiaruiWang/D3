@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <!-- css file -->
+        <link rel="stylesheet" href="css/pie_bar.css">
+        <link rel="stylesheet" href="css/examples.css">
+        <link rel="stylesheet" href="css/vizuly.css">
+        <link rel="stylesheet" href="css/vizuly_weightedtree.css">
+
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/svg.css">
+        <link rel="stylesheet" href="css/jquery-ui-slider-pips.min.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/flick/jquery-ui.css">
+
+        <!-- lib file -->
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="lib/d3.min.js"></script>
+        <script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+        <script src="lib/vizuly_core.min.js"></script>
+        <script src="lib/vizuly_weightedtree.min.js"></script>
+        <script src="js/weightedtree_test.js"></script>
+
+        <!-- <script src="lib/d3.v3.min.js"></script> -->
+        <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+        <script src="lib/underscore-min.js"></script>
+        <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+        <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+        <script src="lib/jquery-ui-slider-pips.min.js"></script>
+        <script type="text/javascript" src="lib/scatter_jquery.js"></script>
+    </head>
+
+
+    <body>
+        <!-- pie_bar plot -->
+        <div id='dashboard'></div>
+        <div id='pieChart' style="display: inline"></div><div id='ta' style="display: inline">
+        <script type="text/javascript" src="js/pie_bar.js"></script>
+        <script type="text/javascript" src="data/freqData.js"></script>
+
+        <!-- treemap plot  -->
+        <div id="currentDisplay" class="selected"></div>
+        <div id="viz_container"></div>
+        <script src="js/tree.js"></script>
+        
+        
+        <!-- scatter plot -->
+        <div id="wrapper">
+            <div id="chart"></div>
+            <div id="title">
+                <h1>Sales from Vendors</h1>
+            </div>
+            <div id="menu">
+                <ul id="x-axis-menu"></ul>
+            </div>
+            <div id="dropDown">
+                <div id="drop1">
+                    <h3>Select Vendors:</h3>
+                </div>
+                <div id="drop2">
+                    <h3>Select Details:</h3>
+                </div>
+            </div>
+            <div id="slider">
+                <p >Service times of Vendor:</p>
+                <p>
+                    <input type="text" class="sliderValue" data-index="0" value="10" />
+                    <input type="text" class="sliderValue" data-index="1" value="401" />    
+                </p>
+                <p id="slider1"></p> 
+                <p >Total payments for Vendor($):</p>
+                <p>
+                    <input type="text"  class="sliderValue" data-index="2" value="699.79" />
+                    <input type="text"  class="sliderValue" data-index="3" value="137991177.24" />
+                </p>
+                <p id="slider2"></p> 
+            </div>
+            <div id = "colorLegend"></div>
+        </div>
+        
+        <script src="data/cp.js"></script>
+        <script src="js/scatter.js"></script>
+    </body>
+</html>
