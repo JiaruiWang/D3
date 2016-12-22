@@ -118,7 +118,7 @@ function prepData(csv) {
     var node={};
     node.values = nest;
     removeEmptyNodes(node,"0","0");
-console.log(nest);
+// console.log(nest);
     return nest;
 }
 
@@ -155,9 +155,9 @@ function initialize() {
     changeSize(d3.select("#currentDisplay").attr("item_value"));
 
     // Open up some of the tree branches.
-    viz.toggleNode(data.values[2]);
-    viz.toggleNode(data.values[2].values[0]);
-    viz.toggleNode(data.values[3]);
+    // viz.toggleNode(data.values[2]);
+    // viz.toggleNode(data.values[2].values[0]);
+    // viz.toggleNode(data.values[3]);
 
 }
 
@@ -198,7 +198,7 @@ function createDataTip(x,y,h1,h2,h3) {
 
 function onMeasure() {
    // Allows you to manually override vertical spacing
-   viz.tree().nodeSize([100,0]);
+   viz.tree().nodeSize([30,0]);
 }
 
 function onMouseOver(e,d,i) {

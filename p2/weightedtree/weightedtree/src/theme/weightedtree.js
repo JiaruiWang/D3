@@ -10,28 +10,29 @@ vizuly.theme.weighted_tree = function (viz) {
         "Axiis" : {
             name: "Axiis",                          // Skin Name
             label_color: "#333",                    // Color of the center label
-            link_colors: ["#bd0026", "#fecc5c", "#fd8d3c", "#f03b20", "#B02D5D",
-                "#9B2C67", "#982B9A", "#692DA7", "#5725AA", "#4823AF",
-                "#d7b5d8", "#dd1c77", "#5A0C7A", "#5A0C7A"],
+            link_colors: ["#5254a3","#9c9ede","#8ca252","#b5cf6b","#bd9e39","#cedb9c","#d6616b","#e7ba52","#ad494a","#e7969c","#ce6dbd",
+                "#3182bd","#de9ed6","#9ecae1","#e6550d","#fd8d3c","#fdd0a2","#31a354","#a1d99b","#9e9ac8","#969696","#d62728","#e377c2","#9467bd"],
             link_stroke: function (d, i) {
                 return d.target.vz_link_color;
             },
             link_stroke_opacity: function (d,i) {
-                if (viz.value()(d.target) <= 0 ) return .15;
-                return .35;                           // Dynamic function that returns opacity (in this case it is 1, but the WHITE skin uses a dynamic opacity
+                // if (viz.value()(d.target) <= 0 ) return .15;
+                // return .35;                           // Dynamic function that returns opacity (in this case it is 1, but the WHITE skin uses a dynamic opacity
+                return 0.6
             },
             node_fill: function (d, i) {
                 return d.vz_link_color;
             },
             node_fill_opacity: function (d, i) {
-                if (viz.value()(d) <= 0 ) return .15;
-                return .4;
+                // if (viz.value()(d) <= 0 ) return .15;
+                // return .4;
+                return 0.8
             },
             node_stroke: function (d, i) {
                 return d.vz_link_color;
             },
             node_stroke_opacity: function (d, i) {
-                return .6;
+                return 1;
             },
             text_fill_opacity: function (d,i) {
                 if (viz.value()(d) <= 0 ) return .35;
@@ -130,8 +131,9 @@ vizuly.theme.weighted_tree = function (viz) {
         var nodes = viz.data();
 
         viz.children()(nodes).forEach(function (node,i) {
-
-            node.vz_link_color = skin.link_colors[i % skin.link_colors.length];
+            // console.log(node)
+            // node.vz_link_color = skin.link_colors[i % skin.link_colors.length];
+            node.vz_link_color = AgenColor(node.key)
             setLinkColor(node);
 
         });

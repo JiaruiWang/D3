@@ -147,7 +147,7 @@ vizuly.viz.weighted_tree = function (parent) {
         var scale;
         if (scope.branchPadding == -1) {
            scale = Math.min(size.height,size.width)/scope.children(scope.data).length;
-            console.log("scale = " + scale);
+            // console.log("scale = " + scale);
         }
         else {
            scale = Math.min(size.height,size.width)*scope.branchPadding;
@@ -165,6 +165,27 @@ vizuly.viz.weighted_tree = function (parent) {
             maxValues[i] = d3.max(vals, function (d) { return scope.value(d)});
             minValues[i] = d3.min(vals, function (d) { return scope.value(d)});
         }
+
+
+        tree.sort(function (a,b) {
+            // console.log(scope)
+            // console.log(scope.value)
+            // console.log(scope.value(a))
+            // console.log(scope.key)
+            // console.log(scope.key(a))
+            // console.log(scope.label)
+            // console.log(scope.label(a))
+
+            if (scope.label(a) > scope.label(b)) {
+                return 1
+            }
+            else if (scope.label(a) < scope.label(b)) {
+                return -1
+            }
+            else
+                return 0;
+        })
+
 
         // Tell everyone we are done making our measurements
         scope.dispatch.measure();

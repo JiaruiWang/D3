@@ -1,0 +1,81 @@
+/* Document styling */
+
+
+
+.lab{
+  font-size: 15px;
+font-weight: bold;
+}
+li, h1, h2 {
+  font-weight: 100;
+}
+.tipsy { font-size:11px; margin-top:-10px;}
+h2 {
+  font-size: 11px;
+  margin: 0;
+  color: #666;
+}
+
+ul {
+  list-style: none;
+  font-size: 12px;
+  padding: 0;
+  margin-top: 3px;
+}
+
+li {
+  font-size: 13px;
+  cursor: pointer;
+  padding-top: 5px;
+  
+}
+
+li:hover {
+  color: #000;
+}
+
+li.preview {
+  font-weight: 400;
+}
+
+li.selected {
+  font-weight: bold;
+  color:red;
+}
+
+.ui-slider {
+    height: 10px;
+    width: 170px;
+    padding-left: 5px; 
+}
+
+
+.d3-tip {
+  line-height: 1;
+  /*font-weight: bold;*/
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
