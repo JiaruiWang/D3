@@ -17,7 +17,7 @@
 
         <!-- lib file -->
         <script src="http://d3js.org/d3.v3.min.js"></script>
-        <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+        <script src="lib/d3.tip.v0.6.3.js"></script>
         <script src="lib/d3.min.js"></script>
         <script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
   <!--       <script src="lib/vizuly_core.min.js"></script>
@@ -27,7 +27,7 @@
         <!-- <script src="lib/d3.v3.min.js"></script> -->
         <script src="https://d3js.org/d3-queue.v3.min.js"></script>
         <script src="lib/underscore-min.js"></script>
-        <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script><script src="js/weightedtree_test.js"></script>
+        <script src="lib/d3.tip.v0.6.3.js"></script><script src="js/weightedtree_test.js"></script>
         <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
         <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
         <script src="lib/jquery-ui-slider-pips.min.js"></script>
@@ -35,27 +35,88 @@
     </head>
 
 
-    <body>
+    <body style="background-color:white;">
 
         <div id='big_title'>
             <svg id='big_t'>
             </svg>
         </div>
         <script type="text/javascript">
-            d3.select('#big_t').append("text")
-            .attr("x", 875)             
-            .attr("y", 75)
-            .attr("text-anchor", "middle")  
-            .style("font-size", "60px")  
-            .style('fill','black') 
-            .text("2011 State Expenditures Analysis");
+            var bt = d3.select('#big_t')
+            bt.append('rect')
+            .attr('width', '100%')
+            .attr('height', '100%')
+            .style('fill', 'rgb(0, 40, 85)')
+            var bttext = bt.append("text")
+            .attr("x", 20)             
+            .attr("y", 60)
+            .attr("text-anchor", "start")  
+            .style("font-size", "60px")
+            .style("font-family", "sans-serif")
+            .style("font-weight","normal")  
+            .style('fill','rgb(160, 116, 0)') 
+            .text("2011 State Expenditures Analysis")
+            .append('tspan')
+            .attr('fill','rgb(160, 116, 0)')
+            .attr('x',20)
+            .attr('y',100)
+            .text("By Jiarui Wang, CS Dept. UC Davis")
+            .style("font-size", "30px")  
+            .style("font-family", "sans-serif")
+            .style("font-weight","normal")
+
+            bttext.append("tspan")
+            .attr('fill','rgb(160, 116, 0)')
+            .attr('x',20)
+            .attr('y',135)
+            .text("This dataset contains information of every single state expenditure. Each expenditure has 5 attributes: Agency, Category, Detail, Vendor, Payment. ")
+            .style("font-size", "18px")  
+            .style("font-family", "sans-serif")
+            .style("font-weight","normal")
+
+            bttext.append("tspan")
+            .attr('fill','rgb(160, 116, 0)')
+            .attr('x',20)
+            .attr('y',158)
+            .text("Total Expenditures of Agencies(bars) and Categories(pie) are shown by mouseout. Mouseover bars, pie and legend will show expenditure of each category in this agency. Mouseover pie and legend, bars will show the contribute of")
+            .style("font-size", "18px")  
+            .style("font-family", "sans-serif")
+            .style("font-weight","normal")
+
+            bttext.append("tspan")
+            .attr('fill','rgb(160, 116, 0)')
+            .attr('x',20)
+            .attr('y',181)
+            .text("each agency to this category. Click on them will lock or unlock the detail view. Click on bar will also open the agency node in data hierarchy below. Data hierarchy is a tree map for Agency, Category, Detail and Vendor. Click on the")
+            .style("font-size", "18px")  
+            .style("font-family", "sans-serif")
+            .style("font-weight","normal")
+
+
+    bttext.append("tspan")
+        .attr('fill','rgb(160, 116, 0)')
+        .attr('x',20)
+        .attr('y',204)
+        .text("leaf will filter the scatter plots by vendor on the right. All Sales are ploted in scatter plots by default. Mouseover circle, will show all sales for the same vendor in big circles. Click on circle, will open data hierarchy for this sale on the left.")
+        .style("font-size", "18px")  
+        .style("font-family", "sans-serif")
+        .style("font-weight","normal")
+
+            bttext.append("tspan")
+        .attr('fill','rgb(160, 116, 0)')
+        .attr('x',20)
+        .attr('y',227)
+        .text("")
+        .style("font-size", "18px")  
+        .style("font-family", "sans-serif")
+        .style("font-weight","normal")
         </script>
         <!-- pie_bar plot -->
         <div id='pie_bar'>
-            <div id='pb_title'>
+<!--             <div id='pb_title'>
                 <svg id='pb_ti'>
                 </svg>
-            </div>
+            </div> -->
             <div id='dashboard'></div>
             <div id='pieChart' ></div>
             <div id='ta'></div>
@@ -64,10 +125,10 @@
 
         <!-- treemap plot  -->
         <div id='tree_map'>
-            <div id='tree_title'>
+<!--             <div id='tree_title'>
                 <svg id='tree_ti'>
                 </svg>
-            </div>      
+            </div>  -->     
             <div id="currentDisplay" class="selected">
                 
                 <div id="viz_container"></div>
@@ -79,19 +140,19 @@
         <!-- scatter plot -->
         <div id="wrapper">
             <div id="chart"></div>
-            <div id="title">
+           <!--  <div id="title">
                 <svg id="charttitle" style="width:100%;height:100%;"></svg>
-            </div>
+            </div> -->
             <div id="menu">
                 <svg id="menusvg" style="width:200px;height:20px;"></svg>
                 <ul id="x-axis-menu"></ul>
             </div>
             <div id="dropDown">
-                <div id="drop1">
+                <div id="drop2">
                     <svg id="drop1svg" style="width:200px;height:18px;"></svg>
                     
                 </div>
-                <div id="drop2">
+                <div id="drop1">
                     <svg id="drop2svg" style="width:200px;height:18px;"></svg>
                     
                 </div>

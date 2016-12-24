@@ -793,15 +793,32 @@ function updateChart(init) {
                     .range([750, 100]);    
   }
 console.log(document.getElementById('charttitle'))
-    d3.select('#charttitle').append("text")
+    var scatterdescript = d3.select('#charttitle').append("text")
         .attr("x", 0)             
-        .attr("y", 25)
+        .attr("y", 0)
         .attr("text-anchor", "start")  
-        .style("font-size", "30px")  
+        .style("font-size", "00px")  
         .style("font-family", "sans-serif")
         .style("font-weight","normal")
         .style('fill','black') 
-        .text("Sales from Vendors");
+        .append("tspan")
+        .attr('fill','black')
+        .attr('x',0)
+        .attr('y','1em')
+        .text("All Sales ploted by default. Mouseover circle, will show all sales for the same vendor in big circles. Click on circle,")
+        .style("font-size", "20px")  
+        .style("font-family", "sans-serif")
+        .style("font-weight","normal");
+
+
+    scatterdescript.append("tspan")
+        .attr('fill','black')
+        .attr('x',0)
+        .attr('y','2.2em')
+        .text("will open data hierarchy for this sale on the left.")
+        .style("font-size", "20px")  
+        .style("font-family", "sans-serif")
+        .style("font-weight","normal")
 
       d3.select('#menusvg').append("text")
         .attr("x", 0)             

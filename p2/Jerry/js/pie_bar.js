@@ -406,15 +406,36 @@ function dashboard(id, fData){
     var hG = histoGram(sF), // create the histogram.
         pC = pieChart(tF), // create the pie-chart.
         leg= legend(tF);  // create the legend.
-    d3.select('#pb_ti').append("text")
-        .attr("x", 875)             
-        .attr("y", 25)
-        .attr("text-anchor", "middle")  
-        .style("font-size", "30px")  
+    var descript =d3.select('#pb_ti').append("text")
+        .attr("x", 0)             
+        .attr("y", 0)
+        .attr("text-anchor", "start")  
+        .style("font-size", "12px")  
         .style("font-family", "sans-serif")
         .style("font-weight","normal")
         .style('fill','black') 
-        .text("Total Expenditures of/within Agencies(bar) and Categories(pie)");
+        // .text()
+        .append("tspan")
+        .attr('fill','black')
+        .attr('x',0)
+        .attr('y','1em')
+        .text("Total Expenditures of Agencies(bars) and Categories(pie) shown by mouseout. Mouseover bars, pie and legend will show expenditure of each category in this agency. Mouseover pie and legend, bars will show")
+        .style("font-size", "20px")  
+        .style("font-family", "sans-serif")
+        .style("font-weight","normal")
+
+    descript.append("tspan")
+        .attr('fill','black')
+        .attr('x',0)
+        .attr('y','2.2em')
+        .text("show the contribute of each agency to this category. Click on all three will lock or unlock the view. Click on bar will also open the agency node in data hierarchy below.")
+        .style("font-size", "20px")  
+        .style("font-family", "sans-serif")
+        .style("font-weight","normal")
+            // "Mouseover bars, pie and legend will show expenditure of each category in this agency. "+
+            // "Mouseover pie and legend, bars will show the contribute of each agency to this category. "+
+            // "Click on all three will lock or unlock the view. "+
+            // "Click on bar will also open the agency node in data hierarchy below.");
 }
 
 dashboard('#dashboard',freqData);

@@ -6,15 +6,18 @@
 body {
   background-color: #fff;
   font-family: helvetica, sans-serif;
-  font-weight: 100;
+    width:1850px;
+    height: 1650px;
+    margin:0px auto;
+
 }
 
 #big_title{
   position: absolute;
   top: 0px;
-  left: 40px;
-  width: 1750px;
-  height: 150px;
+  left: 0px;
+  width: 1910px;
+  height: 230px;
 }
 #big_t{
     position: absolute;
@@ -24,7 +27,7 @@ body {
 
 #pie_bar{
   position: absolute;
-  top: 150px;
+  top: 250px;
   left: 40px;
   width: 1750px;
   height: 900px;
@@ -32,10 +35,10 @@ body {
 }
 #pb_title {
   position: absolute;
-  top: 0px;
+  top: -10px;
   left: 0px;
-  width: 1750px;
-  height: 37px;
+  width: 1800px;
+  height: 50px;
 }
 #pb_ti{
   position: absolute;
@@ -78,7 +81,7 @@ body {
   position: absolute;
   width:1000px;
   height: 1000px;
-  top: 650px;
+  top: 750px;
   left: 830px;
 }
 
@@ -93,9 +96,9 @@ body {
 
 #title {
   position: absolute;
-  top: 0px;
+  top: -10px;
   left: 0px;
-  width:300px;
+  width:1000px;
   height: 50px;
 }
 
@@ -164,17 +167,17 @@ body {
 }
 #tree_map{
     position:absolute;
-    top:650px;
+    top:750px;
     left: 20px;
     width:800px;
     height: 950px;
 }
 #tree_title{
   position:absolute;
-  top: 0px;
+  top: -10px;
   left: 0px;
   width: 800px;
-  height: 37px;
+  height: 50px;
 }
 #tree_ti{
   position:absolute;
